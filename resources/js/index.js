@@ -3,6 +3,7 @@ import getData from './data.js';
 const data = getData();
 const quiz = document.getElementById('quiz')
 const answerEls = document.querySelectorAll('.answer')
+const questionsDiv = document.getElementById('questions')
 const questionEl = document.getElementById('question')
 const yes_label = document.getElementById('yes_label')
 const no_label = document.getElementById('no_label')
@@ -61,27 +62,17 @@ function finalPage(score)
 }
 
 function initialEvent() {
-    quiz.innerHtml = `
-    <div class="quiz-header">
-        <h2 id="question">Question text</h2>
-        <ul>
-            <li>
-                <input type="radio" name="answer" id="yes" class="answer">
-                <label for="yes" id="yes_label">Yes</label>
-            </li>
-            <li>
-                <input type="radio" name="answer" id="no" class="answer">
-                <label for="no" id="no_label">No</label>
-            </li>
-        </ul>
-    </div>
-    <button id="submit">Next</button>
-    `
+    questionsDiv.hidden = false
     submitBtn.removeEventListener('click', initialEvent)
     submitBtn.addEventListener('click', () => {
         const answer = getSelected()
 
         if(answer) {
+            console.log("current position: ", currentQuiz)
+            console.log("current answer: ", data[currentQuiz])
+            console.log("score: ", score);
+            console.log("The answer selected: ", answer)
+            console.log("The correct answer: ", data[currentQuiz].correct)
             if(answer === data[currentQuiz].correct) {
                 score++
             }
