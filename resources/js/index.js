@@ -78,7 +78,7 @@ function initialEvent() {
     <button id="submit">Next</button>
     `
     submitBtn.removeEventListener('click', initialEvent)
-    submitBtn.addEventListener(() => {
+    submitBtn.addEventListener('click', () => {
         const answer = getSelected()
 
         if(answer) {
