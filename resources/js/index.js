@@ -58,10 +58,9 @@ function finalPage(score)
         <button onclick="location.reload()">Reload</button>
         `
     }
-    // TODO: poner si va camino al exito dependiendo de si saca mas del 70% en score
 }
 
-submitBtn.addEventListener('click', () => {
+function initialEvent() {
     quiz.innerHtml = `
     <div class="quiz-header">
         <h2 id="question">Question text</h2>
@@ -78,22 +77,25 @@ submitBtn.addEventListener('click', () => {
     </div>
     <button id="submit">Next</button>
     `
+    submitBtn.removeEventListener('click', initialEvent)
+    submitBtn.addEventListener(() => {
+        const answer = getSelected()
+
+        if(answer) {
+            if(answer === data[currentQuiz].correct) {
+                score++
+            }
+
+            currentQuiz++
+
+            if(currentQuiz < data.length) {
+                loadQuiz()
+            } else {
+                finalPage(score)
+            }
+        }
+    })
     loadQuiz()
-})
-submitBtn.addEventListener('click', () => {
-    const answer = getSelected()
 
-    if(answer) {
-        if(answer === data[currentQuiz].correct) {
-            score++
-        }
-
-        currentQuiz++
-
-        if(currentQuiz < data.length) {
-            loadQuiz()
-        } else {
-            finalPage(score)
-        }
-    }
-})
+}
+submitBtn.addEventListener('click', initialEvent)
