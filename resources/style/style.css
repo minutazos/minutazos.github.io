@@ -7,16 +7,25 @@
 body {
     background-color: #b8c6db;
 
-    background-image: linear-gradient(to right, #ff5f6d     , #ffc371);
+/*    background-image: linear-gradient(to right, #ff5f6d     , #ffc371); */
     font-family: 'Poppins', sans-serif;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    overflow: hidden;
+    overflow: scroll;
     margin: 0;
 }
 
+.pre-quiz {
+    margin: auto 20% auto 20%;
+    text-align: center;
+}
+
+.pre-quiz p {
+    text-align: justify;
+}
 .quiz-container {
     background-color: #fff;
     border-radius: 10px;

@@ -11,8 +11,6 @@ const submitBtn = document.getElementById('submit')
 let currentQuiz = 0
 let score = 0
 
-loadQuiz()
-
 function loadQuiz()
 {
     deselectAnswers()
@@ -44,9 +42,44 @@ function getSelected()
 
 function finalPage(score)
 {
+    if (score > 7) {
+        quiz.innerHTML = `
+        <h3>You answered ${score}/${data.length} questions correctly</h3>
+        <h2>You are on the good way to success!</h2>
+                
+        <button onclick="location.reload()">Reload</button>
+        `
+    } else {
+        quiz.innerHtml = `
+        <h3>You answered ${score}/${data.length} questions correctly</h3>
+        <h2>You still have work to do to be on the good way to success!</h2>
+        <h2>Keep going!</h2>
+
+        <button onclick="location.reload()">Reload</button>
+        `
+    }
     // TODO: poner si va camino al exito dependiendo de si saca mas del 70% en score
 }
 
+submitBtn.addEventListener('click', () => {
+    quiz.innerHtml = `
+    <div class="quiz-header">
+        <h2 id="question">Question text</h2>
+        <ul>
+            <li>
+                <input type="radio" name="answer" id="yes" class="answer">
+                <label for="yes" id="yes_label">Yes</label>
+            </li>
+            <li>
+                <input type="radio" name="answer" id="no" class="answer">
+                <label for="no" id="no_label">No</label>
+            </li>
+        </ul>
+    </div>
+    <button id="submit">Next</button>
+    `
+    loadQuiz()
+})
 submitBtn.addEventListener('click', () => {
     const answer = getSelected()
 
@@ -61,11 +94,6 @@ submitBtn.addEventListener('click', () => {
             loadQuiz()
         } else {
             finalPage(score)
-            quiz.innerHTML = `
-                <h2>You answered ${score}/${data.length} questions correctly</h2>
- 
-                <button onclick="location.reload()">Reload</button>
-            `
         }
     }
 })
